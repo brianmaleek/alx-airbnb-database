@@ -28,7 +28,10 @@ SELECT
 FROM
     properties AS p
 LEFT JOIN
-    reviews AS r ON p.property_id = r.property_id;
+    reviews AS r ON p.property_id = r.property_id
+ORDER BY
+    p.property_id,
+    r.created_at DESC;
 
 -- 3. This SQL script demonstrates how to use full outer join to retrieve all users and all bookings, even if the user has no booking or a booking is not linked to a user.
 SELECT
