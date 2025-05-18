@@ -106,7 +106,7 @@ CREATE INDEX idx_message_conversation ON messages(sender_id, recipient_id, sent_
 -- Before adding indexes, run EXPLAIN on critical queries to establish baseline
 
 -- Example 1: Find properties with reviews above 4.0
-EXPLAIN
+EXPLAIN ANALYZE
 SELECT p.property_id, p.name, AVG(r.rating) as avg_rating
 FROM properties AS p
 JOIN reviews AS r ON p.property_id = r.property_id
@@ -114,14 +114,14 @@ GROUP BY p.property_id, p.name
 HAVING AVG(r.rating) > 4.0;
 
 -- Example 2: Find user booking history with status
-EXPLAIN
+EXPLAIN ANALYZE
 SELECT u.first_name, u.last_name, b.start_date, b.end_date, b.status
 FROM users AS u
 JOIN bookings AS b ON u.user_id = b.user_id
 WHERE u.email = 'sample@example.com' AND b.status = 'confirmed';
 
 -- Example 3: Find properties in a location within price range
-EXPLAIN
+EXPLAIN ANALYZE
 SELECT property_id, name, price_per_night
 FROM properties
 WHERE location LIKE '%New York%' AND price_per_night BETWEEN 100 AND 300
