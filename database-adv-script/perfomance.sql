@@ -51,6 +51,6 @@ FROM
     INNER JOIN properties p ON b.property_id = p.property_id
     LEFT JOIN payments pay ON b.booking_id = pay.booking_id
 WHERE
-    b.status = 'confirmed'
+    b.status = 'confirmed' AND b.start_date >= CURRENT_DATE
 ORDER BY
     b.start_date DESC;
